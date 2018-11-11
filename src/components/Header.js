@@ -3,21 +3,28 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { getFlights } from '../actions';
-
-function fetchFlights(props) {
-  props.getFlights();
-}
+import { departured, arrivals } from '../helpers/constants';
 
 const Header = props => (
   <header>
     <nav>
       <ul>
-        <button type="button" onClick={() => fetchFlights(props)}>
-          вылетающие
-        </button>
-        <li>прилетающие</li>
-        <li>задержанные</li>
-        <li>поиск</li>
+        <li>
+          <button type="button" onClick={() => props.getFlights(departured)}>
+            вылетающие
+          </button>
+        </li>
+        <li>
+          <button type="button" onClick={() => props.getFlights(arrivals)}>
+            прилетающие
+          </button>
+        </li>
+        <li>
+          <button type="button">задержанные</button>
+        </li>
+        <li>
+          <button type="button">поиск</button>
+        </li>
       </ul>
     </nav>
   </header>

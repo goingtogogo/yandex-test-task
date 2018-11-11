@@ -1,4 +1,8 @@
-import { GET_FLIGHTS_REQUEST, GET_FLIGHTS_SUCCESS, GET_FLIGHTS_FAILURE } from '../constants';
+import {
+  GET_FLIGHTS_REQUEST,
+  GET_FLIGHTS_SUCCESS,
+  GET_FLIGHTS_FAILURE,
+} from '../helpers/constants';
 
 const initialState = {
   flightType: 'arrival',
