@@ -2,13 +2,15 @@ import {
   GET_FLIGHTS_REQUEST,
   GET_FLIGHTS_SUCCESS,
   GET_FLIGHTS_FAILURE,
+  SEARCH_FLIGHTS,
 } from '../helpers/constants';
 
 const initialState = {
-  flightType: 'arrival',
-  flights: [],
+  flightType: '',
+  schedule: [],
   isFetching: true,
   error: '',
+  searchTerm: '',
 };
 
 export default (state = initialState, action) => {
@@ -23,12 +25,15 @@ export default (state = initialState, action) => {
     case GET_FLIGHTS_SUCCESS:
       return {
         ...state,
-        flights: action.payload,
+        schedule: action.payload,
         isFetching: false,
         error: '',
       };
     case GET_FLIGHTS_FAILURE:
-      return { state, error: action.payload.message, isFetching: false };
+      return { ...state, error: action.payload.message, isFetching: false };
+    case SEARCH_FLIGHTS: {
+      return { ...state, searchTerm: action.payload };
+    }
     default:
       return state;
   }

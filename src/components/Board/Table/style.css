@@ -22,6 +22,10 @@
   border-bottom-color: transparent;
 }
 
+.warning {
+  color: #ffac02
+}
+
 @media(min-width:321px) {
   .labels {
     line-height: 2;

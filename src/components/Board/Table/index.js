@@ -1,4 +1,5 @@
 /* eslint react/prop-types: 0 */
+/* eslint max-len: ["error", { "code": 180,  }] */
 import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -17,7 +18,6 @@ class Table extends React.Component {
 
   render() {
     const { isFetching, error, flights } = this.props;
-    // console.log(flights);
     return (
       <Fragment>
         {flights && flights.scheduledFlights && (
@@ -28,12 +28,17 @@ class Table extends React.Component {
                 <th>аэропорт</th>
                 <th>номер рейса</th>
                 <th>терминал</th>
+                <th>статус</th>
               </tr>
             </thead>
             <tbody>
               {flights.scheduledFlights.map(flight => (
                 <tr align="center" className={table.values} key={flight.referenceCode}>
-                  <td>{getDate(flight.departureTime)}</td>
+                  <td>
+                    {flights.request.departing
+                      ? getDate(flight.departureTime)
+                      : getDate(flight.arrivalTime)}
+                  </td>
                   <td>
                     {flights.request.departing
                       ? flight.arrivalAirportFsCode
@@ -41,6 +46,13 @@ class Table extends React.Component {
                   </td>
                   <td>{`${flight.carrierFsCode} ${flight.flightNumber}`}</td>
                   <td>{flight.departureTerminal || flight.arrivalTerminal}</td>
+                  <td>
+                    {flight.isCodeshare ? (
+                      <span className={table.warning}>Задерживается</span>
+                    ) : (
+                      'По расписанию'
+                    )}
+                  </td>
                 </tr>
               ))}
             </tbody>
@@ -61,8 +73,24 @@ class Table extends React.Component {
   }
 }
 
+const getFilteredFlights = (flights) => {
+  const { searchTerm } = flights;
+  const { scheduledFlights } = flights.schedule;
+
+  const filteredFlights = scheduledFlights.filter(
+    flight => flight.carrierFsCode.toLowerCase().includes(searchTerm.toLowerCase())
+      || flight.flightNumber.includes(searchTerm),
+  );
+  return searchTerm.length === 0 || !scheduledFlights
+    ? flights.schedule
+    : {
+      ...flights.schedule,
+      scheduledFlights: filteredFlights,
+    };
+};
+
 const mapStateToProps = state => ({
-  flights: state.flights.flights,
+  flights: getFilteredFlights(state.flights),
   isFetching: state.flights.isFetching,
   error: state.flights.error,
 });

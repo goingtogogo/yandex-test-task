@@ -2,6 +2,7 @@ import {
   GET_FLIGHTS_REQUEST,
   GET_FLIGHTS_SUCCESS,
   GET_FLIGHTS_FAILURE,
+  SEARCH_FLIGHTS,
 } from '../helpers/constants';
 
 export const getFlights = flightType => ({
@@ -9,12 +10,17 @@ export const getFlights = flightType => ({
   payload: flightType,
 });
 
-export const getFlightsSuccess = flights => ({
+export const getFlightsSuccess = schedule => ({
   type: GET_FLIGHTS_SUCCESS,
-  payload: flights,
+  payload: schedule,
 });
 
 export const getFlightsFailure = message => ({
   type: GET_FLIGHTS_FAILURE,
   payload: message,
+});
+
+export const searchFlights = flightNumber => ({
+  type: SEARCH_FLIGHTS,
+  payload: flightNumber,
 });

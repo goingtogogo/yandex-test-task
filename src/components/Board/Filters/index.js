@@ -2,7 +2,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { getFlights } from '../../../actions';
+import { getFlights, searchFlights } from '../../../actions';
 import { departured, arrivals } from '../../../helpers/constants';
 import filters from './style.css';
 
@@ -21,6 +21,7 @@ class Filters extends React.Component {
 
   render() {
     const { isActive } = this.state;
+    const { search } = this.props;
     return (
       <div className={filters.wrapper}>
         <button
@@ -37,12 +38,12 @@ class Filters extends React.Component {
         >
           прилет
         </button>
-        <button className={filters.button} type="button">
-          задерживаются
-        </button>
-        <button className={filters.button} type="button">
-          поиск
-        </button>
+        <input
+          className={filters.search}
+          type="text"
+          placeholder="&#128269; поиск"
+          onChange={event => search(event.target.value)}
+        />
       </div>
     );
   }
@@ -51,11 +52,16 @@ class Filters extends React.Component {
 const mapDispatchToProps = dispatch => bindActionCreators(
   {
     flights: getFlights,
+    search: searchFlights,
   },
   dispatch,
 );
 
+function mapStateToProps({ flights }) {
+  return { searchTerm: flights.searchTerm };
+}
+
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps,
 )(Filters);

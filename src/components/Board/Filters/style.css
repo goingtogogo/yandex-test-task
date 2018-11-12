@@ -29,6 +29,19 @@
   color: #1722B7;
 }
 
+.search {
+  padding: 8px 15px;
+  align-self: flex-start;
+  font-size: 18px;
+  border: 3px solid #83BFFF;
+  border-radius: 35px;
+  transition: 0.18s ease;
+}
+
+.search:focus {
+  border: 3px solid #1722B7;
+}
+
 .active {
   composes: button;
   color: #1722B7;
@@ -37,6 +50,8 @@
 .active::after {
   background-color: #1722B7;
 }
+
+
 
 @media (min-width: 768px) {
   .wrapper {
@@ -48,6 +63,6 @@
   }
 
   .button::after {
-    width: calc(100% + 60px);
+    width: calc(100% + 80px);
   }
 }

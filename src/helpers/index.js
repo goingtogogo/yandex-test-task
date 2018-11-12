@@ -2,7 +2,7 @@ import parse from 'date-fns/parse';
 import ruLocale from 'date-fns/locale/ru';
 import format from 'date-fns/format';
 import { ajax } from 'rxjs/observable/dom/ajax';
-import { departured, arrivals } from './constants';
+import { departured, arrivals, delayed } from './constants';
 
 export function getDate(dat) {
   return format(parse(dat), 'HH:mm', { locale: ruLocale });
@@ -30,6 +30,11 @@ export function getData({ payload }) {
       url = `http://flightstats-api.herokuapp.com/flex/schedules/rest/v1/json/to/SVO/arriving/${dateStart}/${hourStart}?appId=${
         process.env.appId
       }&appKey=${process.env.appKey}`;
+      break;
+    case delayed:
+      url = `http://flightstats-api.herokuapp.com/flex/schedules/rest/v1/json/to/SVO/arriving/${dateStart}/${hourStart}?appId=${
+        process.env.appId
+      }&appKey=${process.env.appKey}&extendedOptions=includeCargo`;
       break;
     default:
       return null;
