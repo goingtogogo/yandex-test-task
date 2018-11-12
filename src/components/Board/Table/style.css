@@ -1,12 +1,12 @@
 .wrapper {
   width: 100%;
-  margin-top: 80px;
+  margin-top: 60px;
+  padding: 0 8px;
   border-collapse: collapse;
 }
 
 .labels {
   color: #CCC9D5;
-  line-height: 2;
   border-bottom: 2px solid#E9F0FA;
 }
 
@@ -20,4 +20,10 @@
 .values:hover {
   background-color: #E9F0FA;
   border-bottom-color: transparent;
+}
+
+@media(min-width:321px) {
+  .labels {
+    line-height: 2;
+  }
 }

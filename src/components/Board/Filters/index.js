@@ -16,7 +16,7 @@ class Filters extends React.Component {
   fetchFlights(type) {
     const { flights } = this.props;
     this.setState({ isActive: type });
-    flights(arrivals);
+    flights(type);
   }
 
   render() {

@@ -5,6 +5,7 @@ import { bindActionCreators } from 'redux';
 import { getFlights } from '../../../actions';
 import { departured } from '../../../helpers/constants';
 import { getDate } from '../../../helpers';
+
 import table from './style.css';
 import Loader from '../../Loader';
 
@@ -16,25 +17,30 @@ class Table extends React.Component {
 
   render() {
     const { isFetching, error, flights } = this.props;
+    // console.log(flights);
     return (
       <Fragment>
-        {flights.items && (
+        {flights && flights.scheduledFlights && (
           <table className={table.wrapper}>
             <thead>
               <tr className={table.labels}>
                 <th>время</th>
-                <th>город</th>
+                <th>аэропорт</th>
                 <th>номер рейса</th>
-                <th>статус</th>
+                <th>терминал</th>
               </tr>
             </thead>
             <tbody>
-              {flights.items.map(flight => (
-                <tr align="center" className={table.values} key={flight.i_id}>
-                  <td>{getDate(flight.t_st)}</td>
-                  <td>{flight.mar2.description}</td>
-                  <td>{flight.flt}</td>
-                  <td>{flight.vip_status_rus}</td>
+              {flights.scheduledFlights.map(flight => (
+                <tr align="center" className={table.values} key={flight.referenceCode}>
+                  <td>{getDate(flight.departureTime)}</td>
+                  <td>
+                    {flights.request.departing
+                      ? flight.arrivalAirportFsCode
+                      : flight.departureAirportFsCode}
+                  </td>
+                  <td>{`${flight.carrierFsCode} ${flight.flightNumber}`}</td>
+                  <td>{flight.departureTerminal || flight.arrivalTerminal}</td>
                 </tr>
               ))}
             </tbody>

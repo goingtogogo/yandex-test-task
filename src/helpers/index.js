@@ -1,4 +1,3 @@
-import addHours from 'date-fns/add_hours';
 import parse from 'date-fns/parse';
 import ruLocale from 'date-fns/locale/ru';
 import format from 'date-fns/format';
@@ -10,24 +9,27 @@ export function getDate(dat) {
 }
 
 export function getDateStart() {
-  return new Date().toISOString();
+  return format(new Date(), 'YYYY/MM/DD');
 }
 
-export function getDateEnd() {
-  const dateEnd = addHours(new Date(), 2);
-  return dateEnd.toISOString();
+export function getHourStart() {
+  return format(new Date(), 'HH');
 }
 
 export function getData({ payload }) {
   let url;
   const dateStart = getDateStart();
-  const dateEnd = getDateEnd();
+  const hourStart = getHourStart();
   switch (payload) {
     case departured:
-      url = `https://www.svo.aero/bitrix/timetable/?direction=departure&dateStart=${dateStart}&dateEnd=${dateEnd}&perPage=1000&page=0&locale=ru`;
+      url = `http://flightstats-api.herokuapp.com/flex/schedules/rest/v1/json/from/SVO/departing/${dateStart}/${hourStart}?appId=${
+        process.env.appId
+      }&appKey=${process.env.appKey}`;
       break;
     case arrivals:
-      url = `https://www.svo.aero/bitrix/timetable/?direction=arrival&dateStart=${dateStart}&dateEnd=${dateEnd}&perPage=1000&page=0&locale=ru`;
+      url = `http://flightstats-api.herokuapp.com/flex/schedules/rest/v1/json/to/SVO/arriving/${dateStart}/${hourStart}?appId=${
+        process.env.appId
+      }&appKey=${process.env.appKey}`;
       break;
     default:
       return null;

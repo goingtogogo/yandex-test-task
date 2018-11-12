@@ -2,6 +2,7 @@ const path = require('path');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const autoprefixer = require('autoprefixer');
+const Dotenv = require('dotenv-webpack');
 
 module.exports = {
   entry: {
@@ -19,6 +20,7 @@ module.exports = {
       filename: './index.html',
       favicon: './public/favicon.ico',
     }),
+    new Dotenv(),
   ],
   optimization: {
     splitChunks: {
@@ -38,7 +40,7 @@ module.exports = {
         test: /\.css$/,
         loaders: [
           'style-loader',
-          'css-loader?importLoader=1&modules&localIdentName=[path]___[name]__[local]___[hash:base64:5]',
+          'css-loader?importLoader=1&modules&localIdentName=[name]__[local]--[hash:base64:5]',
         ],
       },
       {

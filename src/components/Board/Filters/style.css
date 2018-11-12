@@ -1,14 +1,15 @@
 .wrapper {
   display: flex;
-  justify-content: space-around
+  flex-wrap: wrap;
 }
 
 .button {
   cursor: pointer;
   outline-offset: -5px;
-  font-size: 22px;
+  font-size: 18px;
   font-weight: 700;
   margin-right: 35px;
+  margin-bottom: 20px;
   border: none;
   background-color: transparent;
   color: #5270D1;
@@ -19,7 +20,7 @@
   content: '';
   display: block;
   margin-top: 10px;
-  width: calc(100% + 60px);
+  width: calc(100% + 15px);
   height: 3px;
   background-color: #83BFFF;
 }
@@ -35,4 +36,18 @@
 
 .active::after {
   background-color: #1722B7;
+}
+
+@media (min-width: 768px) {
+  .wrapper {
+    justify-content: space-around;
+  }
+
+  .button {
+    font-size: 22px;
+  }
+
+  .button::after {
+    width: calc(100% + 60px);
+  }
 }
