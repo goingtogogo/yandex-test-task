@@ -1,0 +1,38 @@
+.wrapper {
+  display: flex;
+  justify-content: space-around
+}
+
+.button {
+  cursor: pointer;
+  outline-offset: -5px;
+  font-size: 22px;
+  font-weight: 700;
+  margin-right: 35px;
+  border: none;
+  background-color: transparent;
+  color: #5270D1;
+  transition: 0.18s ease;
+}
+
+.button::after {
+  content: '';
+  display: block;
+  margin-top: 10px;
+  width: calc(100% + 60px);
+  height: 3px;
+  background-color: #83BFFF;
+}
+
+.button:hover {
+  color: #1722B7;
+}
+
+.active {
+  composes: button;
+  color: #1722B7;
+}
+
+.active::after {
+  background-color: #1722B7;
+}

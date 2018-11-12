@@ -1,6 +1,13 @@
 import addHours from 'date-fns/add_hours';
+import parse from 'date-fns/parse';
+import ruLocale from 'date-fns/locale/ru';
+import format from 'date-fns/format';
 import { ajax } from 'rxjs/observable/dom/ajax';
 import { departured, arrivals } from './constants';
+
+export function getDate(dat) {
+  return format(parse(dat), 'HH:mm', { locale: ruLocale });
+}
 
 export function getDateStart() {
   return new Date().toISOString();

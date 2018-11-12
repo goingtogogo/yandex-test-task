@@ -7,7 +7,7 @@ import {
 const initialState = {
   flightType: 'arrival',
   flights: [],
-  isFetching: false,
+  isFetching: true,
   error: '',
 };
 

@@ -1,6 +1,7 @@
 const path = require('path');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const autoprefixer = require('autoprefixer');
 
 module.exports = {
   entry: {
@@ -35,7 +36,21 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        loaders: ['style-loader', 'css-loader'],
+        loaders: [
+          'style-loader',
+          'css-loader?importLoader=1&modules&localIdentName=[path]___[name]__[local]___[hash:base64:5]',
+        ],
+      },
+      {
+        test: /\.css$/,
+        loader: 'postcss-loader',
+        options: {
+          plugins: [
+            autoprefixer({
+              browsers: ['ie >= 11', 'last 2 version'],
+            }),
+          ],
+        },
       },
       {
         enforce: 'pre',

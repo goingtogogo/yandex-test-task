@@ -1,0 +1,23 @@
+.wrapper {
+  width: 100%;
+  margin-top: 80px;
+  border-collapse: collapse;
+}
+
+.labels {
+  color: #CCC9D5;
+  line-height: 2;
+  border-bottom: 2px solid#E9F0FA;
+}
+
+.values {
+  cursor: pointer;
+  line-height: 2.8;
+  border-bottom: 2px solid#E9F0FA;
+  transition: 0.09s ease;
+}
+
+.values:hover {
+  background-color: #E9F0FA;
+  border-bottom-color: transparent;
+}
