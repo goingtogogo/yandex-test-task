@@ -1,7 +1,6 @@
 .wrapper {
   width: 100%;
   margin-top: 60px;
-  padding: 0 8px;
   border-collapse: collapse;
 }
 
@@ -12,7 +11,6 @@
 
 .values {
   cursor: pointer;
-  line-height: 2.8;
   border-bottom: 2px solid#E9F0FA;
   transition: 0.09s ease;
 }
@@ -26,8 +24,22 @@
   color: #ffac02
 }
 
-@media(min-width:321px) {
+.hidden {
+  display: none;
+}
+
+
+@media(min-width:768px) {
   .labels {
     line-height: 2;
   }
+
+  .values {
+    line-height: 2.8;
+  }
+
+  .hidden {
+    display: block;
+  }
+
 }

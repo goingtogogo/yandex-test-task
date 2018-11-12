@@ -1,7 +1,7 @@
-/* eslint react/prop-types: 0 */
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import PropTypes from 'prop-types';
 import { getFlights, searchFlights } from '../../../actions';
 import { departured, arrivals } from '../../../helpers/constants';
 import filters from './style.css';
@@ -65,3 +65,8 @@ export default connect(
   mapStateToProps,
   mapDispatchToProps,
 )(Filters);
+
+Filters.propTypes = {
+  search: PropTypes.func.isRequired,
+  flights: PropTypes.func.isRequired,
+};

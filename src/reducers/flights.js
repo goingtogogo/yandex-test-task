@@ -7,7 +7,7 @@ import {
 
 const initialState = {
   flightType: '',
-  schedule: [],
+  schedule: {},
   isFetching: true,
   error: '',
   searchTerm: '',

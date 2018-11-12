@@ -1,8 +1,7 @@
-/* eslint react/prop-types: 0 */
-/* eslint max-len: ["error", { "code": 180,  }] */
 import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import PropTypes from 'prop-types';
 import { getFlights } from '../../../actions';
 import { departured } from '../../../helpers/constants';
 import { getDate } from '../../../helpers';
@@ -26,12 +25,12 @@ class Table extends React.Component {
               <tr className={table.labels}>
                 <th>время</th>
                 <th>аэропорт</th>
-                <th>номер рейса</th>
-                <th>терминал</th>
+                <th>рейс</th>
+                <th className={table.hidden}>терминал</th>
                 <th>статус</th>
               </tr>
             </thead>
-            <tbody>
+            <tbody className={table.body}>
               {flights.scheduledFlights.map(flight => (
                 <tr align="center" className={table.values} key={flight.referenceCode}>
                   <td>
@@ -45,7 +44,9 @@ class Table extends React.Component {
                       : flight.departureAirportFsCode}
                   </td>
                   <td>{`${flight.carrierFsCode} ${flight.flightNumber}`}</td>
-                  <td>{flight.departureTerminal || flight.arrivalTerminal}</td>
+                  <td className={table.hidden}>
+                    {flight.departureTerminal || flight.arrivalTerminal}
+                  </td>
                   <td>
                     {flight.isCodeshare ? (
                       <span className={table.warning}>Задерживается</span>
@@ -76,11 +77,11 @@ class Table extends React.Component {
 const getFilteredFlights = (flights) => {
   const { searchTerm } = flights;
   const { scheduledFlights } = flights.schedule;
-
-  const filteredFlights = scheduledFlights.filter(
-    flight => flight.carrierFsCode.toLowerCase().includes(searchTerm.toLowerCase())
-      || flight.flightNumber.includes(searchTerm),
-  );
+  const filteredFlights = scheduledFlights
+    && scheduledFlights.filter(
+      flight => flight.carrierFsCode.toLowerCase().includes(searchTerm.toLowerCase())
+        || flight.flightNumber.includes(searchTerm),
+    );
   return searchTerm.length === 0 || !scheduledFlights
     ? flights.schedule
     : {
@@ -106,3 +107,14 @@ export default connect(
   mapStateToProps,
   mapDispatchToProps,
 )(Table);
+
+Table.propTypes = {
+  isFetching: PropTypes.bool.isRequired,
+  error: PropTypes.string.isRequired,
+  flights: PropTypes.shape({
+    request: PropTypes.shape.isRequired,
+    scheduledFlights: PropTypes.array,
+    appendix: PropTypes.shape.isRequired,
+  }).isRequired,
+  fetchFlights: PropTypes.func.isRequired,
+};
