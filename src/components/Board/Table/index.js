@@ -80,7 +80,10 @@ const getFilteredFlights = (flights) => {
   const filteredFlights = scheduledFlights
     && scheduledFlights.filter(
       flight => flight.carrierFsCode.toLowerCase().includes(searchTerm.toLowerCase())
-        || flight.flightNumber.includes(searchTerm),
+        || flight.flightNumber.includes(searchTerm)
+        || `${flight.carrierFsCode} ${flight.flightNumber}`
+          .toLowerCase()
+          .includes(searchTerm.toLowerCase()),
     );
   return searchTerm.length === 0 || !scheduledFlights
     ? flights.schedule
