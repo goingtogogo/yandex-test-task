@@ -33,6 +33,7 @@
   padding: 8px 15px;
   align-self: flex-start;
   font-size: 18px;
+  line-height: 1.6;
   border: 3px solid #83BFFF;
   border-radius: 35px;
   transition: 0.18s ease;
