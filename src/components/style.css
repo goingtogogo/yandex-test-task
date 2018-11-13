@@ -1,0 +1,22 @@
+body {
+  font-family: -apple-system,
+    BlinkMacSystemFont,
+    “Segoe UI”,
+    “Roboto”,
+    “Oxygen”,
+    “Ubuntu”,
+    “Cantarell”,
+    “Fira Sans”,
+    “Droid Sans”,
+    “Helvetica Neue”,
+    sans-serif;
+  background-color: #FEFEFC;
+}
+
+.wrapper {
+  font-size: 16px;
+  max-width: 960px;
+  margin: 120px auto;
+  padding: 0 10px;
+
+}
